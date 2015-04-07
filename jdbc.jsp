@@ -1,7 +1,7 @@
 <%@ page import="java.sql.*" 
          contentType="text/html;charset=utf-8"%>
  <%
-         String DB_URL = "jdbc:mysql://localhost/mysql";
+         String DB_URL = "jdbc:mysql://localhost/TecTalk";
          String DB_USER = "root";
          String DB_PASSWORD= "tlszps13";
          Connection conn;
