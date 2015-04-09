@@ -6,14 +6,14 @@
 <%
 
  request.setCharacterEncoding("utf-8");
- String driver_name = request.getParameter("DRIVER.NAME");
- String client_name = request.getParameter("CLIENT.NAME");
+ String driver_id = request.getParameter("DRIVER.ID");
+ String customer_id = request.getParameter("CUSTOMER.ID");
  String item_name = request.getParameter("ITEM.NAME");
  String address = request.getParameter("ADDRESS");
 
  
-String enco_driver = URLEncoder.encode(request.getParameter("DRIVER.NAME"));
-String enco_client = URLEncoder.encode(request.getParameter("CLIENT.NAME"));
+String enco_driver = URLEncoder.encode(request.getParameter("DRIVER.ID"));
+String enco_customer = URLEncoder.encode(request.getParameter("CUSTOMER.ID"));
 String enco_item = URLEncoder.encode(request.getParameter("ITEM.NAME"));
 String enco_address = URLEncoder.encode(request.getParameter("ADDRESS"));
 
@@ -24,8 +24,8 @@ String enco_address = URLEncoder.encode(request.getParameter("ADDRESS"));
        String sql = "INSERT INTO ItemInfo(cus_id, dri_id, item_info, item_address) VALUES(?,?,?,?)";
        
        PreparedStatement pstmt = con.prepareStatement(sql);
-       pstmt.setString(1,client_name);
-       pstmt.setString(2,driver_name);
+       pstmt.setString(1,customer_id);
+       pstmt.setString(2,driver_id);
        pstmt.setString(3,item_name);
        pstmt.setString(4,address);
 
@@ -40,7 +40,7 @@ String enco_address = URLEncoder.encode(request.getParameter("ADDRESS"));
  catch(SQLException e){
   }
  
-response.sendRedirect("/TecTalk/MainPost?DRIVER_NAME="+enco_driver+"&CLIENT_NAME="+enco_client+"&ITEM_NAME="+enco_item+"&ADDRESS="+enco_address+"");
+response.sendRedirect("/TecTalk/MainPost?DRIVER_ID="+enco_driver+"&CUSTOMER_ID="+enco_customer+"&ITEM_NAME="+enco_item+"&ADDRESS="+enco_address+"");
 
 %>
 
