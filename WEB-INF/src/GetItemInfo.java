@@ -21,11 +21,11 @@ public class GetItemInfo extends HttpServlet{
 		
 		String sql = "select * from ItemInfo where ";
 		if(driver_id!=null){
-			sql += "dri_id="+driver_id;
+			sql += "dri_id='"+driver_id;
 		}else if (customer_id!=null){
-			sql += "cus_id="+customer_id;
+			sql += "cus_id='"+customer_id;
 		}
-		sql += ";";
+		sql += "';";
 		JSONObject jMain = new JSONObject();
 		JSONArray jArray  = new JSONArray();
 		JSONObject jObject = null;
