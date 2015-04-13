@@ -26,7 +26,6 @@ public class GetItemInfo extends HttpServlet{
 			sql += "cus_id='"+customer_id;
 		}
 		sql += "';";
-		JSONObject jMain = new JSONObject();
 		JSONArray jArray  = new JSONArray();
 		JSONObject jObject = null;
 
