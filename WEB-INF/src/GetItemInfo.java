@@ -42,7 +42,7 @@ public class GetItemInfo extends HttpServlet{
 				jObject.put("dri_id",result.getString("dri_id"));
 				jObject.put("item_info",result.getString("item_info"));
 				jObject.put("item_address",result.getString("item_address"));
-				jObject.put("item_getbyHand",result.getString("item_getbyhand"));
+				jObject.put("item_getbyhand",result.getString("item_getbyhand"));
 				jArray.add(jObject);
 
 			}
