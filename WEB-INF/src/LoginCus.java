@@ -5,15 +5,15 @@ import javax.servlet.annotation.WebServlet;
 import java.sql.*;
 
 
-@WebServlet("/LoginDri")
-public class LoginDri extends HttpServlet{
+@WebServlet("/LoginCus")
+public class LoginCus extends HttpServlet{
         public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
                 
 		request.setCharacterEncoding("utf-8");
                 response.setContentType("text/html;charset=utf-8");
                 
-		String driver_id = request.getParameter("DRIVER_ID");
-                String driver_pw = request.getParameter("DRIVER_PW");
+		String cus_id = request.getParameter("CUS_ID");
+                String cus_passwd = request.getParameter("CUS_PW");
 
 		PrintWriter out = response.getWriter();
                 Statement statement= null;
@@ -21,7 +21,7 @@ public class LoginDri extends HttpServlet{
                 ResultSet result = null;
                 String db_url = "jdbc:mysql://localhost/TecTalk";
 
-                String sql = "select dri_pw from Driver where dri_id='"+driver_id+"';";
+                String sql = "select cus_pw from Customer where cus_id='"+cus_id+"';";
 
                 try{
                         Class.forName("com.mysql.jdbc.Driver");
@@ -30,8 +30,8 @@ public class LoginDri extends HttpServlet{
                         result = statement.executeQuery(sql);
 
 			if(result.next()){
-				String result_pw = result.getString("dri_pw");
-				if(result_pw.equals(driver_pw)){
+				String result_pw = result.getString("cus_pw");
+				if(result_pw.equals(cus_passwd)){
 					out.println("success");
 				}else{
 					out.println("pw_error");

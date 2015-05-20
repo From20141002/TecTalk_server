@@ -1,0 +1,76 @@
+import javax.servlet.http.*;
+import javax.servlet.*;
+import java.io.*;
+import javax.servlet.annotation.WebServlet;
+import org.json.simple.*;
+import java.sql.*;
+
+
+@WebServlet("/Getgetbyhand")
+public class Getgetbyhand extends HttpServlet{
+        public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
+                request.setCharacterEncoding("utf-8");
+                response.setContentType("text/html;charset=utf-8");
+
+		String getbyhand = request.getParameter("getbyhand");
+		String phoneDri = request.getParameter("phoneDri");
+		String cusId = request.getParameter("cusId");
+		String iteminfo = request.getParameter("item_info"); 
+		String driId="";
+                PrintWriter out = response.getWriter();
+                Statement statement= null;
+                Connection con = null;
+
+              
+		ResultSet result_driid = null;
+		ResultSet result_getbyhand = null;
+
+
+                String db_url = "jdbc:mysql://localhost/TecTalk";
+		
+		
+		//String sql_driId = "select dri_id from GCMDRI where dri_id = '";
+		//sql_driId += phoneDri+"';";
+		String sql_driId = "select dri_id from GCMDRI where phone_id='";
+		sql_driId += phoneDri+"';";
+                String sql_getbyhand = "update ItemInfo set item_getbyhand='"+getbyhand+"' where cus_id = '"+cusId+"' and dri_id = '"+driId+"' and item_info = '"+iteminfo+"';";
+		
+		
+
+
+               
+		try{
+                        Class.forName("com.mysql.jdbc.Driver");
+                        con = DriverManager.getConnection(db_url,"root","tlszps13");
+                        statement = con.createStatement();
+
+                        result_driId = statement.executeQuery(sql_driId);
+
+                        if(result_driId!=null){
+				out.println("1");
+                                if(result_driId.next()){
+					driId = result_driId.getString("dri_id");
+					out.prinitln("2");
+					statement.executeQuery(sql_getbyhand);
+					out.println("4");
+                                        statement.close();
+                                        con.close();
+					out.println("5");
+                                	response.sendRedirect("/TecTalk/PushToDri?getbyhand="+getbyhand+"&cusId="+cusId+"&phoneDri="+phoneDri+"&iteminfo="+iteminfo+"");        
+                                }
+			}
+			out.println("3");
+                        statement.close();
+                        con.close();
+
+                }catch(SQLException e){
+                        out.println("sql error : "+e);
+                }catch(Exception e){
+                        out.println("error : "+e);
+                }
+
+        }
+		
+}
+
+
