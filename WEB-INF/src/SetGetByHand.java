@@ -13,43 +13,42 @@ public class SetGetByHand extends HttpServlet{
                 request.setCharacterEncoding("utf-8");
                 response.setContentType("text/html;charset=utf-8");
 
-		String getbyhand = request.getParameter("getbyhand");
-		String phoneDri = request.getParameter("phoneDri");
-		String cusId = request.getParameter("cusId");
-		String itemInfo = URLDecoder.decode(request.getParameter("itemInfo"),"UTF-8"); 
+		String getByHand = request.getParameter("GETBYHAND");
+		String phoneDri = request.getParameter("PHONEDRI");
+		String cusId = request.getParameter("CUSID");
+		String itemInfo = URLDecoder.decode(request.getParameter("ITEMINFO"),"UTF-8"); 
 		String driId="";
                 PrintWriter out = response.getWriter();
-                Statement statement= null;
-                Connection con = null;
+                Statement statementDriId= null;
+                Connection conDriId = null;
 		
-		Statement statement2 = null;
-		Connection con2 = null;
+		Statement statementGetByHand = null;
+		Connection conGetByHand = null;
               
-		ResultSet result_driId = null;
-		ResultSet result_getbyhand = null;
+		ResultSet resultDriId = null;
+		ResultSet resultGetByHand = null;
 
 
-                String db_url = "jdbc:mysql://localhost/TecTalk";
-		
-		
-		String sql_driId = "select dri_id from GCMDRI where phone_id='";
-		sql_driId += phoneDri+"';";
-		
+                String dbUrl = "jdbc:mysql://localhost/TecTalk";
+
+                String sqlGetByHand = "update ItemInfo set item_getbyhand='"+getByHand+"' where cus_id = '"+cusId+"'and dri_id = '"+driId+"'and item_info = '"+itemInfo+"';";	
+		String sqlDriId = "select dri_id from GCMDRI where phone_id='";
+		sqlDriId += phoneDri+"';";
                
 		try{
                         Class.forName("com.mysql.jdbc.Driver");
-                        con = DriverManager.getConnection(db_url,"root","tlszps13");
-                        statement = con.createStatement();
+                        conDriId = DriverManager.getConnection(dbUrl,"root","tlszps13");
+                        statementDriId = conDriId.createStatement();
 
-                        result_driId = statement.executeQuery(sql_driId);
+                        resultDriId = statementDriId.executeQuery(sqlDriId);
 
-                        if(result_driId!=null){
-                                if(result_driId.next()){
-					driId = result_driId.getString("dri_id");
+                        if(resultDriId!=null){
+                                if(resultDriId.next()){
+					driId = resultDriId.getString("dri_id");
                                 }
 			}
-                        statement.close();
-                        con.close();
+                        statementDriId.close();
+                        conDriId.close();
 
                 }catch(SQLException e){
                         out.println("sql error : "+e);
@@ -59,15 +58,14 @@ public class SetGetByHand extends HttpServlet{
 		
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
-                        con2 = DriverManager.getConnection(db_url,"root","tlszps13");
-                        statement2 = con2.createStatement();
-                	String sql_getbyhand = "update ItemInfo set item_getbyhand='"+getbyhand+"' where cus_id = '"+cusId+"'and dri_id = '"+driId+"'and item_info = '"+itemInfo+"';";
-			out.println(sql_getbyhand);
-			statement2.executeUpdate(sql_getbyhand);
-			con2.close();
-			statement2.close();
-			String en_iteminfo = URLEncoder.encode(itemInfo);
-			response.sendRedirect("/TecTalk/PushToDri?getbyhand="+getbyhand+"&cusId="+cusId+"&phoneDri="+phoneDri+"&iteminfo="+en_iteminfo+"");        
+                        conGetByHand = DriverManager.getConnection(dbUrl,"root","tlszps13");
+                        statementGetByHand = conGetByHand.createStatement();
+			out.println(sqlGetByHand);
+			statementGetByHand.executeUpdate(sqlGetByHand);
+			conGetByHand.close();
+			statementGetByHand.close();
+			String enIteminfo = URLEncoder.encode(itemInfo);
+			response.sendRedirect("/TecTalk/PushToDri?GETBYHAND="+getByHand+"&CUSID="+cusId+"&PHONEDRI="+phoneDri+"&ITEMINFO="+enIteminfo+"");        
 			
 		}catch(Exception e){
 			out.println("error2: " + e);

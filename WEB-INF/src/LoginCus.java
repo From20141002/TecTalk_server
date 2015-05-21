@@ -12,26 +12,26 @@ public class LoginCus extends HttpServlet{
 		request.setCharacterEncoding("utf-8");
                 response.setContentType("text/html;charset=utf-8");
                 
-		String cus_id = request.getParameter("CUS_ID");
-                String cus_passwd = request.getParameter("CUS_PW");
+		String cusId = request.getParameter("CUSID");
+                String cusPasswd = request.getParameter("CUSPW");
 
 		PrintWriter out = response.getWriter();
                 Statement statement= null;
                 Connection con = null;
                 ResultSet result = null;
-                String db_url = "jdbc:mysql://localhost/TecTalk";
+                String dbUrl = "jdbc:mysql://localhost/TecTalk";
 
-                String sql = "select cus_pw from Customer where cus_id='"+cus_id+"';";
+                String sql = "select cus_pw from Customer where cus_id='"+cusId+"';";
 
                 try{
                         Class.forName("com.mysql.jdbc.Driver");
-                        con = DriverManager.getConnection(db_url,"root","tlszps13");
+                        con = DriverManager.getConnection(dbUrl,"root","tlszps13");
                         statement = con.createStatement();
                         result = statement.executeQuery(sql);
 
 			if(result.next()){
-				String result_pw = result.getString("cus_pw");
-				if(result_pw.equals(cus_passwd)){
+				String resultPasswd = result.getString("cus_pw");
+				if(resultPasswd.equals(cusPasswd)){
 					out.println("success");
 				}else{
 					out.println("pw_error");

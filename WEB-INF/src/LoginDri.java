@@ -12,26 +12,26 @@ public class LoginDri extends HttpServlet{
 		request.setCharacterEncoding("utf-8");
                 response.setContentType("text/html;charset=utf-8");
                 
-		String driver_id = request.getParameter("DRIVER_ID");
-                String driver_pw = request.getParameter("DRIVER_PW");
+		String driId = request.getParameter("DRIID");
+                String driPasswd = request.getParameter("DRIPW");
 
 		PrintWriter out = response.getWriter();
                 Statement statement= null;
                 Connection con = null;
                 ResultSet result = null;
-                String db_url = "jdbc:mysql://localhost/TecTalk";
+                String dbUrl = "jdbc:mysql://localhost/TecTalk";
 
-                String sql = "select dri_pw from Driver where dri_id='"+driver_id+"';";
+                String sql = "select dri_pw from Driver where dri_id='"+driId+"';";
 
                 try{
                         Class.forName("com.mysql.jdbc.Driver");
-                        con = DriverManager.getConnection(db_url,"root","tlszps13");
+                        con = DriverManager.getConnection(dbUrl,"root","tlszps13");
                         statement = con.createStatement();
                         result = statement.executeQuery(sql);
 
 			if(result.next()){
-				String result_pw = result.getString("dri_pw");
-				if(result_pw.equals(driver_pw)){
+				String resultPasswd = result.getString("dri_pw");
+				if(resultPasswd.equals(driPasswd)){
 					out.println("success");
 				}else{
 					out.println("pw_error");

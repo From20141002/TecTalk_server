@@ -11,29 +11,31 @@ public class SetDriInfo extends HttpServlet{
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
-		String driId = request.getParameter("DRIVER_ID");
+
+
+		String driId = request.getParameter("DRIID");
 		PrintWriter out = response.getWriter();
 		Statement statement= null;
 		Connection con = null; 	
 		ResultSet result = null;
-		String db_url = "jdbc:mysql://localhost/TecTalk";
+		String dbUrl = "jdbc:mysql://localhost/TecTalk";
 		
 		String sql = "select * from Driver where dri_id = '"+driId+"';";
 		JSONObject jObject = null;
 
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection(db_url,"root","tlszps13");
+			con = DriverManager.getConnection(dbUrl,"root","tlszps13");
 			statement = con.createStatement();
 			result = statement.executeQuery(sql);
 		
 			while(result.next()){
 			
 				jObject = new JSONObject();
-				jObject.put("dri_id",result.getString("dri_id"));
-				jObject.put("dri_name",result.getString("dri_name"));
-				jObject.put("dri_phone",result.getString("dri_phone"));
-				jObject.put("dri_company",result.getString("dri_company"));;
+				jObject.put("DRIID",result.getString("dri_id"));
+				jObject.put("DRINAME",result.getString("dri_name"));
+				jObject.put("DRIPHONE",result.getString("dri_phone"));
+				jObject.put("DRICOMPANY",result.getString("dri_company"));;
 
 			}
 			statement.close();

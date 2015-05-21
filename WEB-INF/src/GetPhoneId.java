@@ -13,7 +13,7 @@ public class GetPhoneId extends HttpServlet{
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		
-		String msg = request.getParameter("MSG");
+		String time = request.getParameter("TIME");
 		String cusId = request.getParameter("CUSID");
 		String driId = request.getParameter("DRIID");
 		String itemInfo = URLDecoder.decode(request.getParameter("ITEMINFO"),"UTF-8");	
@@ -49,7 +49,7 @@ public class GetPhoneId extends HttpServlet{
 							statement.close();
 							con.close();
 							String en_itemInfo = URLEncoder.encode(itemInfo);
-		  					response.sendRedirect("/TecTalk/PushToCus?msg="+msg+"&phoneCus="+phoneCus+"&phoneDri="+phoneDri+"&itemInfo="+en_itemInfo+"");
+		  					response.sendRedirect("/TecTalk/PushToCus?TIME="+time+"&PHONECUS="+phoneCus+"&PHONEDRI="+phoneDri+"&ITEMINFO="+en_itemInfo+"");
 						}
 					}
 				}

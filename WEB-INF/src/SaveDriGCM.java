@@ -11,31 +11,28 @@ public class SaveDriGCM extends HttpServlet{
                 request.setCharacterEncoding("utf-8");
                 response.setContentType("text/html;charset=utf-8");
 
-                String dri_id = request.getParameter("DRI_ID");
-                String phone_id = request.getParameter("PHONE_ID");
+                String driId = request.getParameter("DRIID");
+                String phoneId = request.getParameter("PHONEID");
      
  	        PrintWriter out = response.getWriter();
-
-
                 Statement statement= null;
                 Connection con = null;
                 ResultSet result = null;
-                String db_url = "jdbc:mysql://localhost/TecTalk";
-
+                String dbUrl = "jdbc:mysql://localhost/TecTalk";
                 String sql = "insert into GCMDRI(dri_id, phone_id) values (?,?)";
 
                 try{
                         Class.forName("com.mysql.jdbc.Driver");
-                        con = DriverManager.getConnection(db_url,"root","tlszps13");    
+                        con = DriverManager.getConnection(dbUrl,"root","tlszps13");    
 
-         PreparedStatement pstmt = con.prepareStatement(sql);
-         pstmt.setString(1,dri_id);
-         pstmt.setString(2,phone_id);
+        		PreparedStatement pstmt = con.prepareStatement(sql);
+         		pstmt.setString(1,driId);
+         		pstmt.setString(2,phoneId);
          
 
-         pstmt.executeUpdate();
+        		pstmt.executeUpdate();
    
-         pstmt.close();
+         		pstmt.close();
                         con.close();
       
          out.println("success");

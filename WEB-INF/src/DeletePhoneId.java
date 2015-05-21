@@ -13,8 +13,8 @@ public class DeletePhoneId extends HttpServlet{
                 request.setCharacterEncoding("utf-8");
                 response.setContentType("text/html;charset=utf-8");
 
-                String cusId = request.getParameter("CUS_ID");
-		String driId = request.getParameter("DRI_ID");
+                String cusId = request.getParameter("CUSID");
+		String driId = request.getParameter("DRIID");
 
 
 		PrintWriter out = response.getWriter();
@@ -22,7 +22,7 @@ public class DeletePhoneId extends HttpServlet{
                 Statement statement= null;
                 Connection con = null;
                 ResultSet result = null;
-                String db_url = "jdbc:mysql://localhost/TecTalk";
+                String dbUrl = "jdbc:mysql://localhost/TecTalk";
 		String sql = "";
 
 		if(cusId != null){
@@ -35,7 +35,7 @@ public class DeletePhoneId extends HttpServlet{
 
                 try{
                         Class.forName("com.mysql.jdbc.Driver");
-                        con = DriverManager.getConnection(db_url,"root","tlszps13");
+                        con = DriverManager.getConnection(dbUrl,"root","tlszps13");
 
 			statement = con.createStatement();
 			statement.executeUpdate(sql);

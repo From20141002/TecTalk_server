@@ -11,8 +11,8 @@ public class SaveCusGCM extends HttpServlet{
                 request.setCharacterEncoding("utf-8");
                 response.setContentType("text/html;charset=utf-8");
 
-                String cusId = request.getParameter("CUS_ID");
-                String phoneId = request.getParameter("PHONE_ID");
+                String cusId = request.getParameter("CUSID");
+                String phoneId = request.getParameter("PHONEID");
 
 
 		PrintWriter out = response.getWriter();

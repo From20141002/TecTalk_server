@@ -11,31 +11,31 @@ public class SaveDriInfo extends HttpServlet{
                 request.setCharacterEncoding("utf-8");
                 response.setContentType("text/html;charset=utf-8");
 
-                String driver_id = request.getParameter("DRIVER_ID");
-                String driver_pw = request.getParameter("DRIVER_PW");
-		String driver_name = request.getParameter("DRIVER_NAME");
-		String driver_phone = request.getParameter("DRIVER_PHONE");
-		String driver_company = request.getParameter("DRIVER_COMPANY");
+                String driId = request.getParameter("DRIID");
+                String driPasswd = request.getParameter("DRIPW");
+		String driName = request.getParameter("DRINAME");
+		String driPhone = request.getParameter("DRIPHONE");
+		String driCompany = request.getParameter("DRICOMPANY");
 
 		PrintWriter out = response.getWriter();
 
                 Statement statement= null;
                 Connection con = null;
                 ResultSet result = null;
-                String db_url = "jdbc:mysql://localhost/TecTalk";
+                String dbUrl = "jdbc:mysql://localhost/TecTalk";
 
                 String sql = "insert into Driver (dri_id, dri_pw, dri_name, dri_phone, dri_company) values (?,?,?,?,?)";
 
                 try{
                         Class.forName("com.mysql.jdbc.Driver");
-                        con = DriverManager.getConnection(db_url,"root","tlszps13");
+                        con = DriverManager.getConnection(dbUrl,"root","tlszps13");
 
 			PreparedStatement pstmt = con.prepareStatement(sql);
-			pstmt.setString(1,driver_id);
-			pstmt.setString(2,driver_pw);
-			pstmt.setString(3,driver_name);
-			pstmt.setString(4,driver_phone);
-			pstmt.setString(5,driver_company);
+			pstmt.setString(1,driId);
+			pstmt.setString(2,driPasswd);
+			pstmt.setString(3,driName);
+			pstmt.setString(4,driPhone);
+			pstmt.setString(5,driCompany);
 
 			pstmt.executeUpdate();
 	

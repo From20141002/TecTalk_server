@@ -11,19 +11,21 @@ public class GetItemInfo extends HttpServlet{
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
-		String driver_id = request.getParameter("DRIVER_ID");
-		String customer_id = request.getParameter("CUSTOMER_ID");
+		
+
+		String driId = request.getParameter("DRIID");
+		String cusId = request.getParameter("CUSID");
 		PrintWriter out = response.getWriter();
 		Statement statement= null;
 		Connection con = null; 	
 		ResultSet result = null;
-		String db_url = "jdbc:mysql://localhost/TecTalk";
+		String dbUrl = "jdbc:mysql://localhost/TecTalk";
 		
 		String sql = "select * from ItemInfo where ";
-		if(driver_id!=null){
-			sql += "dri_id='"+driver_id;
-		}else if (customer_id!=null){
-			sql += "cus_id='"+customer_id;
+		if(driId!=null){
+			sql += "dri_id='"+driId;
+		}else if (cusId!=null){
+			sql += "cus_id='"+cusId;
 		}
 		sql += "';";
 		JSONArray jArray  = new JSONArray();
@@ -31,18 +33,18 @@ public class GetItemInfo extends HttpServlet{
 
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection(db_url,"root","tlszps13");
+			con = DriverManager.getConnection(dbUrl,"root","tlszps13");
 			statement = con.createStatement();
 			result = statement.executeQuery(sql);
 		
 			while(result.next()){
 			
 				jObject = new JSONObject();
-				jObject.put("cus_id",result.getString("cus_id"));
-				jObject.put("dri_id",result.getString("dri_id"));
-				jObject.put("item_info",result.getString("item_info"));
-				jObject.put("item_address",result.getString("item_address"));
-				jObject.put("item_getbyhand",result.getString("item_getbyhand"));
+				jObject.put("CUSID",result.getString("cus_id"));
+				jObject.put("DRIID",result.getString("dri_id"));
+				jObject.put("ITEMINFO",result.getString("item_info"));
+				jObject.put("ADDRESS",result.getString("item_address"));
+				jObject.put("GETBYHAND",result.getString("item_getbyhand"));
 				jArray.add(jObject);
 
 			}

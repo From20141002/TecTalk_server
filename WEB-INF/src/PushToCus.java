@@ -15,18 +15,17 @@ public class PushToCus extends HttpServlet{
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 
-		String time = request.getParameter("msg");
-		String phoneDri = request.getParameter("phoneDri");
-		String itemInfo = request.getParameter("itemInfo");
-		String phoneCus = request.getParameter("phoneCus");
+		String time = request.getParameter("TIME");
+		String phoneDri = request.getParameter("PHONEDRI");
+		String itemInfo = request.getParameter("ITEMINFO");
+		String phoneCus = request.getParameter("PHONECUS");
 
 
 		JSONObject msg = new JSONObject();
-     		out.println("item : " + itemInfo);
 
-		msg.put("msg",time);
-		msg.put("phoneDri",phoneDri);
-		msg.put("itemInfo",itemInfo);
+		msg.put("TIME",time);
+		msg.put("PHONEDRI",phoneDri);
+		msg.put("ITEMINFO",itemInfo);
 
 
 		String apiKey = "AIzaSyD6DTOM1ZnIw7gbmeS60GwoROz8n0vURXQ";
