@@ -14,12 +14,21 @@ public class PushToCus extends HttpServlet{
 		PrintWriter out = response.getWriter();
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
-		JSONObject msg = new JSONObject();
-     		msg.put("msg",request.getParameter("msg"));
-		msg.put("itemInfo",request.getParameter("itemInfo"));	
+
+		String time = request.getParameter("msg");
+		String phoneDri = request.getParameter("phoneDri");
+		String itemInfo = request.getParameter("itemInfo");
 		String phoneCus = request.getParameter("phoneCus");
-		msg.put("phoneDri",request.getParameter("phoneDri"));
- 
+
+
+		JSONObject msg = new JSONObject();
+     		out.println("item : " + itemInfo);
+
+		msg.put("msg",time);
+		msg.put("phoneDri",phoneDri);
+		msg.put("itemInfo",itemInfo);
+
+
 		String apiKey = "AIzaSyD6DTOM1ZnIw7gbmeS60GwoROz8n0vURXQ";
                 String gcmURL = "https://android.googleapis.com/gcm/send";
                 String messageId = String.valueOf(Math.random() % 100 + 1);
